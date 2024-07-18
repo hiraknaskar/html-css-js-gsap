@@ -1,42 +1,62 @@
-var tl =gsap.timeline();
-tl.from(".line h1",{
-    y:150,
-    stagger:0.25,
-    duration:0.6,
-    delay:0.5
-});
-tl.from("#line1-part1, .line h2",{
-    opacity:0,
-    onStart:function(){
-        var h5timer = document.querySelector('#line1-part1 h5');
-        var grow=0;
-    setInterval(function(){
-    if(grow<100){
-        h5timer.innerHTML=grow++;
-        console.log(grow);
+function LoadingAnimation() {
+  var tl = gsap.timeline();
+  tl.from(".line h1", {
+    y: 150,
+    stagger: 0.25,
+    duration: 0.6,
+    delay: 0.5,
+  });
+  tl.from("#line1-part1, .line h2", {
+    opacity: 0,
+    onStart: function () {
+      var h5timer = document.querySelector("#line1-part1 h5");
+      var grow = 0;
+      setInterval(function () {
+        if (grow < 100) {
+          h5timer.innerHTML = grow++;
+          console.log(grow);
+        } else {
+          h5timer.innerHTML = grow;
+          console.log(grow);
+        }
+      }, 35);
+    },
+  });
 
-    }
-    else{
-        h5timer.innerHTML=grow;
-        console.log(grow);
-    }
-},35)}
-});
+  var tl = gsap.timeline();
+  tl.to("#loader", {
+    opacity: 0,
+    duration: 0.4,
+    delay: 6,
+  });
 
-var tl =gsap.timeline()
-tl.to("#loader",{
-    opacity:0,
-    duration:0.4,
-    delay:6
-});
+  tl.from("#page1", {
+    delay: 0.1,
+    y: 1600,
+    opacity: 0,
+    duration: 0.5,
+    ease: "power4",
+  });
+  tl.to("#loader", {
+    display: "none",
+  });
+  tl.from(".hero h1",{
+    y:120,
+    stagger:0.2
+})
+}
 
-tl.from("#page1",{
-    delay:0.1,
-    y:1600,
-    opacity:0,
-    duration:0.5,
-    ease:"power4"
-});
-tl.to("#loader",{
-    display:"none"
-});
+
+
+function cursorAnimation() {
+  document.addEventListener("mousemove", function (dets) {
+    gsap.to("#crsr", {
+      left: dets.x,
+      top: dets.y,
+    });
+  });
+
+  Shery.makeMagnet("#nav-part2 h4");
+}
+LoadingAnimation();
+cursorAnimation();
